@@ -5,24 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My AI Chat</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #fff; margin: 0; display: flex; flex-direction: column; height: 100vh; }
-        .header { text-align: center; padding: 20px; }
-        .vel-logo { width: 120px; height: auto; border-radius: 10px; }
-        .chat-container { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; }
-        .message { max-width: 80%; padding: 10px 15px; border-radius: 15px; margin-bottom: 10px; }
-        .user-msg { background-color: #1E88E5; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-        .bot-msg { background-color: #f0f0f0; color: black; align-self: flex-start; border-bottom-left-radius: 2px; }
-        .input-area { display: flex; padding: 10px; background-color: #f9f9f9; border-top: 1px solid #ddd; }
-        input { flex: 1; padding: 12px; border: 1px solid #ccc; border-radius: 20px; outline: none; }
-        button { margin-left: 10px; padding: 10px 20px; background-color: #1E88E5; color: white; border: none; border-radius: 20px; font-weight: bold; }
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #fff; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            height: 100vh; 
+        }
+        .header { 
+            text-align: center; 
+            padding: 30px 20px 10px 20px; 
+        }
+        .header h2 {
+            font-size: 22px;
+            color: #333;
+        }
+        .chat-container { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 15px; 
+            display: flex; 
+            flex-direction: column; 
+        }
+        .message { 
+            max-width: 80%; 
+            padding: 10px 15px; 
+            border-radius: 15px; 
+            margin-bottom: 10px; 
+            line-height: 1.4;
+        }
+        .user-msg { 
+            background-color: #1E88E5; 
+            color: white; 
+            align-self: flex-end; 
+            border-bottom-right-radius: 2px; 
+        }
+        .bot-msg { 
+            background-color: #f0f0f0; 
+            color: black; 
+            align-self: flex-start; 
+            border-bottom-left-radius: 2px; 
+        }
+        .input-area { 
+            display: flex; 
+            padding: 10px; 
+            background-color: #f9f9f9; 
+            border-top: 1px solid #ddd; 
+        }
+        input { 
+            flex: 1; 
+            padding: 12px; 
+            border: 1px solid #ccc; 
+            border-radius: 20px; 
+            outline: none; 
+            font-size: 14px;
+        }
+        button { 
+            margin-left: 10px; 
+            padding: 10px 20px; 
+            background-color: #1E88E5; 
+            color: white; 
+            border: none; 
+            border-radius: 20px; 
+            font-weight: bold; 
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #ccc;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Front Page / Header -->
+    <!-- மேலே உள்ள தலைப்பு பகுதி -->
     <div class="header">
-        <!-- வேல் Logo (இந்த இடத்தில் உங்கள் படத்தின் Link வரும்) -->
-        <img src="vel_logo.jpg" alt="Vel Logo" class="vel-logo">
         <h2>Hello, let's start chatting</h2>
     </div>
 
@@ -34,14 +91,14 @@
     <!-- Input Box -->
     <div class="input-area">
         <input type="text" id="userInput" placeholder="Type a message or hold to speak">
-        <button onclick="sendMessage()">Send</button>
+        <button id="sendBtn" onclick="sendMessage()">Send</button>
     </div>
 
     <script>
-        // இங்கே தான் AI-யுடன் பேசும் வேலை நடக்கும்
         async function sendMessage() {
             const inputField = document.getElementById('userInput');
             const chatBox = document.getElementById('chatBox');
+            const sendBtn = document.getElementById('sendBtn');
             const userText = inputField.value.trim();
 
             if (userText === "") return;
@@ -60,19 +117,21 @@
             chatBox.appendChild(loadingDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            // 3. AI-க்கு அழைப்பு விடு (இங்கே API Call வரும்)
+            sendBtn.disabled = true;
+
+            // 3. AI-க்கு அழைப்பு விடு
             try {
-                // API Call Logic (நாம் அடுத்த படியில் இதை முழுமைப்படுத்துவோம்)
                 const response = await fetchAIResponse(userText);
                 loadingDiv.innerText = response;
             } catch (error) {
                 loadingDiv.innerText = "Error: " + error.message;
             }
             
+            sendBtn.disabled = false;
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // இது ஒரு Demo Function. அடுத்த படியில் இதை உண்மையான API-ஆக மாற்றுவோம்.
+        // இது ஒரு Demo Function (பொம்மை AI)
         async function fetchAIResponse(text) {
             return new Promise((resolve) => {
                 setTimeout(() => {
