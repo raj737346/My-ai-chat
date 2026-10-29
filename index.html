@@ -6,7 +6,7 @@
     <title>My AI Chat</title>
     <style>
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
             background-color: #fff; 
             margin: 0; 
             display: flex; 
@@ -14,55 +14,44 @@
             height: 100vh; 
             overflow: hidden;
         }
-        
-        /* Top Navigation Bar */
         .top-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background-color: #fff;
-        }
-        .nav-left, .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
         }
         .nav-icon {
             background: none;
             border: none;
-            cursor: pointer;
-            color: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 0;
+            cursor: pointer;
+            display: flex;
         }
-
-        /* Main Chat Area */
         .header { 
             text-align: center; 
-            padding: 10px 10px 20px 10px; 
+            padding: 16px; 
         }
         .header h2 {
-            font-size: 22px;
+            font-size: 20px;
             color: #333;
+            margin: 0;
             font-weight: 600;
         }
         .chat-container { 
             flex: 1; 
             overflow-y: auto; 
-            padding: 15px; 
+            padding: 16px; 
             display: flex; 
             flex-direction: column; 
         }
         .message { 
             max-width: 80%; 
-            padding: 10px 15px; 
+            padding: 10px 14px; 
             border-radius: 18px; 
             margin-bottom: 10px; 
-            line-height: 1.4;
             font-size: 15px;
+            line-height: 1.4;
         }
         .user-msg { 
             background-color: #1E88E5; 
@@ -76,54 +65,41 @@
             align-self: flex-start; 
             border-bottom-left-radius: 4px; 
         }
-        
-        /* Bottom Input Area */
         .input-wrapper { 
-            padding: 10px 15px 20px 15px;
-            background-color: #fff;
+            padding: 10px 16px 20px 16px;
         }
         .input-box {
             display: flex;
             flex-direction: column;
             background-color: #f4f4f4;
             border-radius: 24px;
-            padding: 10px 15px;
-        }
-        .input-row {
-            display: flex;
-            align-items: center;
+            padding: 10px 14px;
         }
         .input-row input { 
-            flex: 1; 
+            width: 100%;
             background: transparent;
             border: none; 
             outline: none; 
             font-size: 16px;
-            color: #333;
             padding: 5px 0;
         }
-        .input-row input::placeholder {
-            color: #999;
-        }
+        .input-row input::placeholder { color: #999; }
         .action-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 8px;
         }
-        .action-left {
-            display: flex;
-            gap: 8px;
-        }
+        .action-left { display: flex; gap: 8px; }
         .pill-btn {
             display: flex;
             align-items: center;
-            gap: 5px;
-            padding: 6px 12px;
-            border-radius: 20px;
+            gap: 4px;
+            padding: 6px 10px;
+            border-radius: 16px;
             border: 1px solid #ddd;
             background-color: #fff;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #333;
             cursor: pointer;
@@ -133,18 +109,12 @@
             color: #1E88E5;
             border-color: #e8f0fe;
         }
-        .action-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .action-right { display: flex; align-items: center; gap: 10px; }
         .icon-btn {
             background: none;
             border: none;
             cursor: pointer;
             display: flex;
-            align-items: center;
-            justify-content: center;
             color: #333;
         }
         .send-btn {
@@ -152,52 +122,36 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            margin-left: 5px;
-        }
-        .send-btn:disabled {
-            background-color: #ccc;
         }
     </style>
 </head>
 <body>
-
-    <!-- Top Navigation Bar (படத்தில் உள்ளது போல) -->
     <div class="top-nav">
-        <div class="nav-left">
+        <button class="nav-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="16" x2="15" y2="16"></line></svg>
+        </button>
+        <div style="display: flex; gap: 16px;">
             <button class="nav-icon">
-                <!-- Menu Icon (Two lines) -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="16" x2="15" y2="16"></line></svg>
-            </button>
-        </div>
-        <div class="nav-right">
-            <button class="nav-icon">
-                <!-- Mute Icon -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
             </button>
             <button class="nav-icon">
-                <!-- Plus/Chat Icon -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
             </button>
         </div>
     </div>
 
-    <!-- Header Text -->
     <div class="header">
         <h2>Hello, let's start chatting</h2>
     </div>
 
-    <!-- Chat Messages -->
-    <div class="chat-container" id="chatBox">
-        <!-- Messages will appear here -->
-    </div>
+    <div class="chat-container" id="chatBox"></div>
 
-    <!-- Input Area -->
     <div class="input-wrapper">
         <div class="input-box">
             <div class="input-row">
@@ -206,23 +160,21 @@
             <div class="action-row">
                 <div class="action-left">
                     <button class="pill-btn" onclick="this.classList.toggle('active')">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
-                        Think
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg> Think
                     </button>
                     <button class="pill-btn active" onclick="this.classList.toggle('active')">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                        Search
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Search
                     </button>
                 </div>
                 <div class="action-right">
                     <button class="icon-btn">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
                     </button>
                     <button class="icon-btn">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
                     </button>
                     <button class="send-btn" id="sendBtn" onclick="sendMessage()">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
                     </button>
                 </div>
             </div>
@@ -233,9 +185,7 @@
         async function sendMessage() {
             const inputField = document.getElementById('userInput');
             const chatBox = document.getElementById('chatBox');
-            const sendBtn = document.getElementById('sendBtn');
             const userText = inputField.value.trim();
-
             if (userText === "") return;
 
             const userDiv = document.createElement('div');
@@ -250,26 +200,9 @@
             chatBox.appendChild(loadingDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            sendBtn.disabled = true;
-
-            try {
-                const response = await fetchAIResponse(userText);
-                loadingDiv.innerText = response;
-            } catch (error) {
-                loadingDiv.innerText = "Error: " + error.message;
-            }
-            
-            sendBtn.disabled = false;
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        // Temporary Demo AI
-        async function fetchAIResponse(text) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    resolve("நான் ஒரு AI. நீங்கள் சொன்னது: " + text);
-                }, 1000);
-            });
+            setTimeout(() => {
+                loadingDiv.innerText = "நான் ஒரு AI. நீங்கள் சொன்னது: " + userText;
+            }, 1000);
         }
     </script>
 </body>
